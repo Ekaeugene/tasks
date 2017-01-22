@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>My AngularJS App</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css" />
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" type="text/css" href="bower_components/angular-ui-bootstrap/dist/ui-bootstrap-csp.css">
+  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+
+</head>
+<body>
+
+  <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+  <div class="container" ng-controller="ListController">
+ 
+    <a class="btn btn-success" ng-controller="CrudeController" ng-click="createTask();">Create task</a>
+
+
+    <select name="show-filter"  ng-model="search" ng-options="option for option in selectOptions" >
+      </select>
+    <table class="table-responsive table table-striped table-bordered">
+      <thead>
+          <tr >
+              <th ng-repeat='(key, val) in task[0]'>{{key}}</th>
+              <th class="action-column">&nbsp;</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr ng-class="{'alert alert-success' : item.statusTask==1, 'hidden': item.statusTask==undefined, 'alert alert-danger fade in alert-dismissable': (item.date_deadline < date && item.statusTask != 1) }" data-key="{{item.id}}" ng-repeat="item in task | filter: (search ==='Все' ? undefined : search):true"> 
+
+              <td ng-repeat='(key, val) in item'>{{val}}</td>
+              <td ng-controller="CrudeController">
+                <button ng-click="compliteTask();"><span class="glyphicon glyphicon-ok"></span></button>
+               <button ng-click='updateTask();'><span class="glyphicon glyphicon-pencil"></span> </button>
+               <button ng-click="deleteTask();"><span class="glyphicon glyphicon-trash"></span></button>
+              </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+  </div>
+
+  
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  -->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+  <script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
+     <script src="bower_components/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+   <script src="bower_components/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+  <script src="app.js"></script>
+
+  <script src="components/version/version.js"></script>
+  <script src="components/version/version-directive.js"></script>
+  <script src="components/version/interpolate-filter.js"></script>
+</body>
+</html>
