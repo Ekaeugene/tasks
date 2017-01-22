@@ -16,21 +16,25 @@
 	    <textarea class="form-control"  ng-model="formCreate.important">{{formCreate.important}}</textarea>
 
 	    <label for="date_deadline">date_deadline</label>
-	    <textarea class="form-control"  ng-model="formCreate.date_deadline">{{formCreate.date_deadline}}</textarea>
 
+
+	    <input class="form-control" type="date"  value="{{formCreate.date_deadline| date: 'yyyy/mm/dd'}}"name="input" ng-model="formCreate.date_deadline"
+       placeholder="yyyy-MM-dd" min="2017-01-01" max="2018-12-31" required />
+
+	  
 	    <label for="date_completly">date_completly</label>
-	    <textarea class="form-control"  ng-model="formCreate.date_completly">{{formCreate.date_completly}}</textarea>
 
+	    <input class="form-control" type="date"  value="{{formCreate.date_completly}}"name="input" ng-model="formCreate.date_completly"
+       placeholder="yyyy-MM-dd" min="2017-01-01" max="2018-12-31" required />
 
 	    <label for="status">status</label>
 	    <textarea class="form-control"  ng-model="formCreate.statusTask">{{formUpd.statusTask}}</textarea required>
-
 	  </div>
 
 	  <button ng-click="createForm();"type="submit" class="btn btn-default">Create</button>
 	</form>
-		<div ng-class="{'alert alert-success' : createSuccess}">{{createSuccess}}</div>
-		<div ng-class="{'alert alert-danger fade in alert-dismissable' : errorText}">{{errorText}}</div>
+		<div ng-if="createSuccess" ng-class="{'alert alert-success' : createSuccess}">{{createSuccess}}</div>
+		<div ng-if="!createSuccess" ng-class="{'alert alert-danger fade in alert-dismissable' : errorText}">{{errorText}}</div>
 </div>
 <div class="modal-footer">
 	<button class="btn btn-warning" type="button"

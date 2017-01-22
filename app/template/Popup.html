@@ -20,10 +20,16 @@
 	    <textarea class="form-control"  ng-model="formUpd.important">{{formUpd.important}}</textarea>
 
 	    <label for="date_deadline">date_deadline</label>
-	    <textarea class="form-control"  ng-model="formUpd.date_deadline">{{formUpd.date_deadline | date:'yyyy-MM-dd'}}</textarea>
 
+
+	    <input class="form-control"  id="exampleInput" value="{{formUpd.date_deadline}}"name="input" ng-model="formUpd.date_deadline"
+       placeholder="yyyy-MM-dd" min="2017-01-01" max="2018-12-31" required />
+
+	  
 	    <label for="date_completly">date_completly</label>
-	    <textarea class="form-control"  ng-model="formUpd.date_completly">{{formUpd.date_completly| date:'yyyy-MM-dd'}}</textarea>
+
+	    <input class="form-control"  id="exampleInput" value="{{formUpd.date_completly}}"name="input" ng-model="formUpd.date_completly"
+       placeholder="yyyy-MM-dd" min="2017-01-01" max="2018-12-31" required />
 
 
 	    <label for="status">status</label>
