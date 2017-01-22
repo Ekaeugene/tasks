@@ -176,7 +176,7 @@ myApp
   }]);
 
 myApp
-  .controller('PopUpCreate', ['$scope','$uibModalInstance', 'CrudeTaskService','items','$timeout','UpdateWindowState', function ($scope, $uibModalInstance, CrudeTaskService, items, $timeout, UpdateWinState) {
+  .controller('PopUpCreate', ['$scope','$uibModalInstance', 'CrudeTaskService','items','$timeout','UpdateWindowState', '$filter', function ($scope, $uibModalInstance, CrudeTaskService, items, $timeout, UpdateWinState, $filter) {
     $scope.scopeList = items;
     $scope.formCreate = {
       "id": $scope.scopeList.task[$scope.scopeList.task.length-1].id + 1, 
@@ -189,8 +189,12 @@ myApp
     };
     $scope.createForm = function() {
       console.log(Object.values($scope.formCreate).indexOf(null));
-      $scope.formCreate.date_deadline = $scope.formCreate.date_deadline.getFullYear()+'-'+$scope.formCreate.date_deadline.getMonth()+1+'-'+$scope.formCreate.date_deadline.getDate();
-      $scope.formCreate.date_completly = $scope.formCreate.date_completly.getFullYear()+'-'+$scope.formCreate.date_completly.getMonth()+1+'-'+$scope.formCreate.date_completly.getDate();
+      var date_deadline = new Date( $scope.formCreate.date_deadline.getFullYear(),$scope.formCreate.date_deadline.getMonth(),$scope.formCreate.date_deadline.getDate() );
+      var date_completly = new Date( $scope.formCreate.date_completly.getFullYear(), $scope.formCreate.date_completly.getMonth()+1, $scope.formCreate.date_completly.getDate() );
+      $scope.formCreate.date_deadline = $filter('date')(date_deadline,'yyyy-MM-dd');
+      $scope.formCreate.date_completly = $filter('date')(date_completly,'yyyy-MM-dd');
+         
+
          if(  Object.values($scope.formCreate).indexOf(null) == -1 ) {
             var data = "name="+$scope.formCreate.name+"&description="+$scope.formCreate.description+"&important="+$scope.formCreate.important+"&date_deadline="+$scope.formCreate.date_deadline+"&date_completly="+$scope.formCreate.date_completly+"&statusTask="+$scope.formCreate.statusTask;
             console.log($scope.formCreate);

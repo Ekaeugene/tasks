@@ -39,7 +39,7 @@
           </tr>
       </thead>
       <tbody>
-          <tr ng-class="{'alert alert-success' : item.statusTask==1, 'hidden': item.statusTask==undefined, 'alert alert-danger fade in alert-dismissable': (item.date_deadline < date && item.statusTask != 1) }" data-key="{{item.id}}" ng-repeat="item in task | filter: (search ==='Все' ? undefined : search):true"> 
+          <tr ng-class="{'alert alert-success' : item.statusTask==1, 'hidden': item.statusTask==undefined, 'alert alert-danger fade in alert-dismissable': (item.date_deadline > date && item.statusTask != 1) }" data-key="{{item.id}}" ng-repeat="item in task | filter: (search ==='Все' ? undefined : search):true"> 
 
               <td ng-repeat='(key, val) in item'>{{val}}</td>
               <td ng-controller="CrudeController">
